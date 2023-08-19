@@ -1,6 +1,6 @@
 package com.practicas.fetchtest.di
 
-import com.practicas.fetchtest.data.remote.ApiService
+import com.practicas.fetchtest.data.api.ApiService
 import com.practicas.fetchtest.utils.Dictionary.BASE_URL
 import dagger.Module
 import dagger.Provides

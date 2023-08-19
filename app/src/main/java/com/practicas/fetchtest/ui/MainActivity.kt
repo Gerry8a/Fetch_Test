@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.practicas.fetchtest.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
-import com.practicas.fetchtest.data.remote.response.ApiResponseStatus
+import com.practicas.fetchtest.data.api.response.ApiResponseStatus
 
 
 @AndroidEntryPoint
@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity() {
             when(it){
                 is ApiResponseStatus.Error -> Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
                 is ApiResponseStatus.Loading -> {}
-                is ApiResponseStatus.Success -> Toast.makeText(this, "Exito", Toast.LENGTH_SHORT).show()
+                is ApiResponseStatus.Success ->{
+                    binding.tvName.text = "${it.data[2].id} ${it.data[2].listId} ${it.data[2].name}"
+                }
             }
         }
     }

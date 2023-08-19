@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.practicas.fetchtest.data.remote.response.ApiResponseStatus
+import com.practicas.fetchtest.data.api.response.ApiResponseStatus
+import com.practicas.fetchtest.data.api.response.RandomObject
 import com.practicas.fetchtest.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +16,8 @@ class RandomViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _itemList = MutableLiveData<ApiResponseStatus<Any>>()
-    val itemList: LiveData<ApiResponseStatus<Any>> get() = _itemList
+    private val _itemList = MutableLiveData<ApiResponseStatus<List<RandomObject>>>()
+    val itemList: LiveData<ApiResponseStatus<List<RandomObject>>> get() = _itemList
 
     init {
         getRandomList()

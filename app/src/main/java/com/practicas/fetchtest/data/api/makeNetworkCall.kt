@@ -1,7 +1,7 @@
-package com.practicas.fetchtest.data.remote
+package com.practicas.fetchtest.data.api
 
 import com.practicas.fetchtest.R
-import com.practicas.fetchtest.data.remote.response.ApiResponseStatus
+import com.practicas.fetchtest.data.api.response.ApiResponseStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.UnknownHostException
@@ -13,10 +13,10 @@ suspend fun <T> makeNetworkCall(
         ApiResponseStatus.Success(call())
     } catch (e: UnknownHostException){
         //No internet connection
-        ApiResponseStatus.Error(R.string.no_internet_connection)
+        ApiResponseStatus.Error(e.message.toString())
     } catch (e: Exception){
         //Unknown error
-        ApiResponseStatus.Error(R.string.unknown_error)
+        ApiResponseStatus.Error(e.message.toString())
     }
 }
 
