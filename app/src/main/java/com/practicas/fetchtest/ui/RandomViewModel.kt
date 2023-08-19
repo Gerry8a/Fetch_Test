@@ -27,7 +27,7 @@ class RandomViewModel @Inject constructor(
         _itemList.value = ApiResponseStatus.Loading()
         repository.downloadItemList().let {
             when(it){
-                is ApiResponseStatus.Error ->{
+                 is ApiResponseStatus.Error ->{
                     _itemList.value = ApiResponseStatus.Error(it.message)
                 }
                 is ApiResponseStatus.Loading -> {}
