@@ -1,4 +1,4 @@
-package com.practicas.fetchtest.data.api.response
+package com.practicas.fetchtest.model
 
 import com.squareup.moshi.Json
 

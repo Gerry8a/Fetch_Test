@@ -1,6 +1,6 @@
 package com.practicas.fetchtest.data.api.dto
 
-import com.practicas.fetchtest.data.api.response.RandomObject
+import com.practicas.fetchtest.model.RandomObject
 
 class RandomObjectDTOMapper {
     private   fun fromDTOToRandomObjectDomain(randomObjectDTO: RandomObjectDTO): RandomObject {

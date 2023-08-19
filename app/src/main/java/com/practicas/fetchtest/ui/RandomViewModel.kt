@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicas.fetchtest.data.api.response.ApiResponseStatus
-import com.practicas.fetchtest.data.api.response.RandomObject
+import com.practicas.fetchtest.model.RandomObject
 import com.practicas.fetchtest.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

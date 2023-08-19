@@ -4,7 +4,7 @@ import com.practicas.fetchtest.data.api.ApiService
 import com.practicas.fetchtest.data.api.dto.RandomObjectDTOMapper
 import com.practicas.fetchtest.data.api.makeNetworkCall
 import com.practicas.fetchtest.data.api.response.ApiResponseStatus
-import com.practicas.fetchtest.data.api.response.RandomObject
+import com.practicas.fetchtest.model.RandomObject
 import javax.inject.Inject
 
 class Repository @Inject constructor(
