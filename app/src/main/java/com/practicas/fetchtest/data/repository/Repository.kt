@@ -18,7 +18,7 @@ class Repository @Inject constructor(
         val randomListApiResponse = apiService.getListRandomItems()
         val randomDTOList = randomListApiResponse
         val mapper = RandomObjectDTOMapper()
-        mapper.fromRandomDTOListToRandomObjectDomainList(randomDTOList)
+        mapper.sortedList(randomDTOList)
     }
 
     suspend fun insertRandomObject(entity: RandomObjectEntity) = randomDao.insertData(entity)
