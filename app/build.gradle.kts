@@ -4,7 +4,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -64,8 +66,9 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     //Room
     val room_version = "2.5.2"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-ktx:2.2.5")
     //Splash scren
     implementation("androidx.core:core-splashscreen:1.0.1")
     //ViewModel

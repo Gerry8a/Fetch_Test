@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicas.fetchtest.data.api.response.ApiResponseStatus
+import com.practicas.fetchtest.data.local.entity.RandomObjectEntity
 import com.practicas.fetchtest.model.RandomObject
 import com.practicas.fetchtest.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,14 +27,29 @@ class RandomViewModel @Inject constructor(
     fun getRandomList() = viewModelScope.launch {
         _itemList.value = ApiResponseStatus.Loading()
         repository.downloadItemList().let {
-            when(it){
-                 is ApiResponseStatus.Error ->{
+            when (it) {
+                is ApiResponseStatus.Error -> {
                     _itemList.value = ApiResponseStatus.Error(it.message)
                 }
+
                 is ApiResponseStatus.Loading -> {}
-                is ApiResponseStatus.Success -> _itemList.value = ApiResponseStatus.Success(it.data)
+                is ApiResponseStatus.Success -> {
+                    _itemList.value = ApiResponseStatus.Success(it.data)
+//                    for (randomObject in it.data) {
+//                        insertObject(randomObject)
+//                    }
+                }
             }
         }
+    }
+
+    fun insertObject(randomObject: RandomObject) = viewModelScope.launch {
+        val randomEntity = RandomObjectEntity(
+            customId = randomObject.id,
+            listId = randomObject.listId,
+            name = randomObject.name
+        )
+        repository.insertRandomObject(randomEntity)
     }
 
 }

@@ -30,14 +30,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun buildObservers() {
-        viewModel.itemList.observe(this@MainActivity){
-            when(it){
-                is ApiResponseStatus.Error -> Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+        viewModel.itemList.observe(this@MainActivity) {
+            when (it) {
+                is ApiResponseStatus.Error -> Toast.makeText(
+                    this,
+                    it.message.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 is ApiResponseStatus.Loading -> {}
-                is ApiResponseStatus.Success ->{
-                    for (randomObject in it.data){
-                        fillUI(randomObject)
+                is ApiResponseStatus.Success -> {
+                    it.let {
+                        for (randomObject in it.data) {
+                            fillUI(randomObject)
+                            viewModel.insertObject(randomObject)
+                        }
                     }
+
                 }
             }
         }
@@ -46,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private fun fillUI(randomObject: RandomObject) {
         val manager = LinearLayoutManager(this)
         randomList.add(randomObject)
-        binding.rvList.adapter = ObjectAdapter(randomList){}
+        binding.rvList.adapter = ObjectAdapter(randomList) {}
         binding.rvList.layoutManager = manager
         binding.rvList.setHasFixedSize(true)
     }
