@@ -9,8 +9,8 @@ import com.practicas.fetchtest.utils.Dictionary.RANDOM_OBJECT_TABLE
 
 @Dao
 interface RandomObjectDao {
- /*   @Query("SELECT * FROM random_table")
-    suspend fun getAllData(): List<RandomObjectEntity>*/
+//    @Query("SELECT * FROM random_table WHERE listId == 1")
+//    suspend fun getAllData(): List<RandomObjectEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertData(randomObjectEntity: RandomObjectEntity)

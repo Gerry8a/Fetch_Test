@@ -1,17 +1,15 @@
 package com.practicas.fetchtest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.practicas.fetchtest.data.api.response.ApiResponseStatus
+import com.practicas.fetchtest.data.local.entity.RandomObjectEntity
 import com.practicas.fetchtest.databinding.FragmentFirstGroupBinding
 import com.practicas.fetchtest.model.RandomObject
 import com.practicas.fetchtest.ui.adapters.ObjectAdapter
@@ -23,6 +21,7 @@ class FirstGroup : Fragment() {
     private lateinit var binding: FragmentFirstGroupBinding
     private val viewModel: RandomViewModel by viewModels()
     private val randomList = ArrayList<RandomObject>()
+    private val entityList = ArrayList<RandomObjectEntity>()
 
 
     override fun onCreateView(
@@ -43,18 +42,21 @@ class FirstGroup : Fragment() {
         viewModel.getRandomList(1)
         viewModel.itemList.observe(requireActivity()) {
             when (it) {
-                is ApiResponseStatus.Error -> Toast.makeText(
-                    requireContext(),
-                    it.message.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
+                is ApiResponseStatus.Error -> {
+                    binding.loading.root.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        it.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
 
+                }
                 is ApiResponseStatus.Loading -> {}
                 is ApiResponseStatus.Success -> {
+                    binding.loading.root.visibility = View.GONE
                     it.let {
                         for (randomObject in it.data) {
                             fillUI(randomObject)
-                            viewModel.insertObject(randomObject)
                         }
                     }
                 }

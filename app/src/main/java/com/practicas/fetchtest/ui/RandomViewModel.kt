@@ -27,13 +27,12 @@ class RandomViewModel @Inject constructor(
                 is ApiResponseStatus.Error -> {
                     _itemList.value = ApiResponseStatus.Error(it.message)
                 }
-
                 is ApiResponseStatus.Loading -> {}
                 is ApiResponseStatus.Success -> {
                     _itemList.value = ApiResponseStatus.Success(it.data)
-//                    for (randomObject in it.data) {
-//                        insertObject(randomObject)
-//                    }
+                    for (randomObject in it.data) {
+                        insertObject(randomObject)
+                    }
                 }
             }
         }
@@ -47,5 +46,4 @@ class RandomViewModel @Inject constructor(
         )
         repository.insertRandomObject(randomEntity)
     }
-
 }

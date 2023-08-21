@@ -38,18 +38,21 @@ class ThirdGroup : Fragment() {
         viewModel.getRandomList(3)
         viewModel.itemList.observe(requireActivity()) {
             when (it) {
-                is ApiResponseStatus.Error -> Toast.makeText(
-                    requireContext(),
-                    it.message.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
+                is ApiResponseStatus.Error -> {
+                    binding.loading.root.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        it.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
                 is ApiResponseStatus.Loading -> {}
                 is ApiResponseStatus.Success -> {
+                    binding.loading.root.visibility = View.GONE
                     it.let {
                         for (randomObject in it.data) {
                             fillUI(randomObject)
-                            viewModel.insertObject(randomObject)
                         }
                     }
                 }
