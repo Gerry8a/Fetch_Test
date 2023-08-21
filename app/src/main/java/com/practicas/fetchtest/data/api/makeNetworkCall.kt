@@ -6,6 +6,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.UnknownHostException
 
+/**
+ * Catch any kind of exception
+ */
 suspend fun <T> makeNetworkCall(
     call: suspend () -> T
 ): ApiResponseStatus<T> = withContext(Dispatchers.IO){

@@ -2,6 +2,9 @@ package com.practicas.fetchtest.data.api.dto
 
 import com.practicas.fetchtest.model.RandomObject
 
+/**
+ * Data Transfer Object, design pattern used to transform the data from api into the model that it will be used
+ */
 class RandomObjectDTOMapper {
     private fun fromDTOToRandomObjectDomain(randomObjectDTO: RandomObjectDTO): RandomObject {
         return RandomObject(randomObjectDTO.id, randomObjectDTO.listId, randomObjectDTO.name)
