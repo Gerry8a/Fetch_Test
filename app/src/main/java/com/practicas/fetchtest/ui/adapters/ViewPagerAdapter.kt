@@ -17,7 +17,7 @@ class ViewPagerAdapter(fragmentManager: Fragment): FragmentStateAdapter(fragment
             0 -> FirstGroup()
             1 -> SecondGroup()
             2 -> ThirdGroup()
-            4 -> FourthGroup()
+            3 -> FourthGroup()
 
             else -> {FirstGroup()}
         }

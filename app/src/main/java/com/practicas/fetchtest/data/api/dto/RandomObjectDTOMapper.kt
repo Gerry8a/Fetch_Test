@@ -7,15 +7,19 @@ class RandomObjectDTOMapper {
         return RandomObject(randomObjectDTO.id, randomObjectDTO.listId, randomObjectDTO.name)
     }
 
-    fun fromRandomDTOListToRandomObjectDomainList(randomObjectDTOList: List<RandomObjectDTO>): List<RandomObject> {
-        return randomObjectDTOList.map { fromDTOToRandomObjectDomain(it) }
-    }
-
-    fun sortedList(randomObjectDTOList: List<RandomObjectDTO>): List<RandomObject> {
-        val sortedList = randomObjectDTOList.sortedBy {
-            it.listId
+    fun sortedList(randomObjectDTOList: List<RandomObjectDTO>, group: Int): List<RandomObject> {
+        val groupList = randomObjectDTOList.filter {
+            it.listId == group
         }
 
-        return sortedList.map { fromDTOToRandomObjectDomain(it) }
+        val emptyList = groupList.filter {
+            !it.name.isNullOrEmpty()
+        }
+
+        val nullList = emptyList.sortedBy {
+            it.name
+        }
+
+        return nullList.map { fromDTOToRandomObjectDomain(it) }
     }
 }

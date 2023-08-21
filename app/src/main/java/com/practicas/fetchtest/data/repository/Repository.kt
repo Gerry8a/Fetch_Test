@@ -14,11 +14,11 @@ class Repository @Inject constructor(
     private val randomDao: RandomObjectDao
 ) {
 
-    suspend fun downloadItemList(): ApiResponseStatus<List<RandomObject>> = makeNetworkCall {
+    suspend fun downloadItemList(group: Int): ApiResponseStatus<List<RandomObject>> = makeNetworkCall {
         val randomListApiResponse = apiService.getListRandomItems()
         val randomDTOList = randomListApiResponse
         val mapper = RandomObjectDTOMapper()
-        mapper.sortedList(randomDTOList)
+        mapper.sortedList(randomDTOList, group)
     }
 
     suspend fun insertRandomObject(entity: RandomObjectEntity) = randomDao.insertData(entity)

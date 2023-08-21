@@ -36,6 +36,11 @@ class FirstGroup : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        buildObservers()
+    }
+
+    private fun buildObservers() {
+        viewModel.getRandomList(1)
         viewModel.itemList.observe(requireActivity()) {
             when (it) {
                 is ApiResponseStatus.Error -> Toast.makeText(
@@ -52,19 +57,15 @@ class FirstGroup : Fragment() {
                             viewModel.insertObject(randomObject)
                         }
                     }
-
                 }
             }
         }
     }
 
     private fun fillUI(randomObject: RandomObject) {
-//        val manager = GridLayoutManager(requireContext(), GRID_SPA)
         randomList.add(randomObject)
         binding.rvList.adapter = ObjectAdapter(randomList) {}
         binding.rvList.layoutManager = GridLayoutManager(requireContext(), 4)
         binding.rvList.setHasFixedSize(true)
     }
-
-
 }

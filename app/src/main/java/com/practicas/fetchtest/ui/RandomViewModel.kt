@@ -20,13 +20,9 @@ class RandomViewModel @Inject constructor(
     private val _itemList = MutableLiveData<ApiResponseStatus<List<RandomObject>>>()
     val itemList: LiveData<ApiResponseStatus<List<RandomObject>>> get() = _itemList
 
-    init {
-        getRandomList()
-    }
-
-    fun getRandomList() = viewModelScope.launch {
+    fun getRandomList(group: Int) = viewModelScope.launch {
         _itemList.value = ApiResponseStatus.Loading()
-        repository.downloadItemList().let {
+        repository.downloadItemList(group).let {
             when (it) {
                 is ApiResponseStatus.Error -> {
                     _itemList.value = ApiResponseStatus.Error(it.message)
