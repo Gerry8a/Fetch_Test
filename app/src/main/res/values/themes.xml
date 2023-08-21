@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.FetchTest" parent="Base.Theme.FetchTest" />
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
