@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -47,7 +48,7 @@ class FirstGroup : Fragment() {
                 is ApiResponseStatus.Success -> {
                     it.let {
                         for (randomObject in it.data) {
-//                            fillUI(randomObject)
+                            fillUI(randomObject)
                             viewModel.insertObject(randomObject)
                         }
                     }
@@ -57,13 +58,13 @@ class FirstGroup : Fragment() {
         }
     }
 
-//    private fun fillUI(randomObject: RandomObject) {
-//        val manager = LinearLayoutManager(requireContext())
-//        randomList.add(randomObject)
-//        binding.rvList.adapter = ObjectAdapter(randomList) {}
-//        binding.rvList.layoutManager = manager
-//        binding.rvList.setHasFixedSize(true)
-//    }
+    private fun fillUI(randomObject: RandomObject) {
+//        val manager = GridLayoutManager(requireContext(), GRID_SPA)
+        randomList.add(randomObject)
+        binding.rvList.adapter = ObjectAdapter(randomList) {}
+        binding.rvList.layoutManager = GridLayoutManager(requireContext(), 4)
+        binding.rvList.setHasFixedSize(true)
+    }
 
 
 }

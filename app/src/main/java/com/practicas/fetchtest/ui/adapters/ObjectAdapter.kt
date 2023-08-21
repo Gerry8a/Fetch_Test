@@ -25,7 +25,7 @@ class ObjectAdapter(
 
     class ViewHolder(private val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(randomObject: RandomObject, onClickListener: (RandomObject) -> Unit){
-            binding.tvId.text = randomObject.id.toString()
+//            binding.tvId.text = randomObject.id.toString()
             binding.tvOrder.text = randomObject.listId.toString()
             binding.tvName.text = randomObject.name.toString()
         }
